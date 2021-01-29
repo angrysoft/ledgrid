@@ -7,7 +7,7 @@ all: buildjs buildcss
 buildjs: canvas.ts
 	tsc canvas.ts
 
-buildjs: style.scss
+buildcss: style.scss
 	scss -t commpress style.scss style.min.css
 
 install: index.html canvas.js style.min.css
