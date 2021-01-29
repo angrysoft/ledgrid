@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="LedGrid">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://angrysoft.ovh/css/angrycss-1.min.css">
+        <link rel="stylesheet" href="style.min.css">
+        <script src="canvas.js"></script>
+
+    </head>
+    <body>
+        <div class="container-fluid app">
+            <div class="row center-xs">
+                <div class="col-xs-12 cavas-wrapper txt-center">
+                    <canvas id="led-canvas"></canvas>
+                </div>
+            </div>
+            <div class="row center-xs grid-form">
+                <div class="col-xs-2"><button class="btn blue" id="add-grid">Add Grid</button></div>
+                <div class="col-xs-2"><button class="btn red" id="del-grid">Save Canvas</button></div>
+                <div class="col-xs-2"><button class="btn red">Clear Canvas</button></div>
+                <div class="col-xs-6">
+                    <label class="label">Canvas Size</label>
+                    <input id="canvas-width" type="number" placeholder="x"> H
+                    <input id="canvas-height" type="number" placeholder="y"> V
+                </div>
+            </div>
+            <div class="row center-xs grid-list">
+                <div class="col-xs-12">
+                    <table class="table dark striped">
+                          <thead>
+                            <tr>
+                                <th>Size x</th>
+                                <th>Size y</th>
+                                <th>Cols</th>
+                                <th>Rows</th>
+                                <th>Offset x</th>
+                                <th>offset y</th>
+                                <th>Name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                <td contenteditable="true">128</td>
+                                <td contenteditable="true">128</td>
+                                <td contenteditable="true">0</td>
+                                <td contenteditable="true">0</td>
+                                <td contenteditable="true">15</td>
+                                <td contenteditable="true">8</td>
+                                <td contenteditable="true">Test</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                  </div>
+            </div>
+        </div>
+    </body>
+</html>
