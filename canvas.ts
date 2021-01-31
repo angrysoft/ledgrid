@@ -51,6 +51,7 @@ class GridTable {
 
     public constructor(id:string) {
         this.tableElement = document.getElementById(id) as HTMLTableElement;
+        this.tableElement.
     }
 
     public addRow() {}
