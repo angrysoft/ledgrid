@@ -1,66 +1,4 @@
-class App {
-    private canvas: Canvas;
-    public constructor() {
-        this.canvas = new Canvas(1920, 1080);
-        this.canvas.addGrid(9,4,128,128);
-    }
-}
-
-class Canvas {
-    private canvasElement: HTMLCanvasElement;
-    private ctx: CanvasRenderingContext2D;
-    private inputCanvasWidth: HTMLInputElement;
-    private inputCanvasHeight: HTMLInputElement;
-
-    public constructor(width:number, height:number) {
-        this.canvasElement = document.getElementById("led-canvas") as HTMLCanvasElement;
-        this.ctx = this.canvasElement.getContext("2d");
-        
-        this.inputCanvasWidth = document.getElementById("canvas-width") as HTMLInputElement;
-        this.inputCanvasHeight = document.getElementById("canvas-height") as HTMLInputElement;
-        this.inputCanvasWidth.valueAsNumber = width;
-        this.inputCanvasHeight.valueAsNumber = height;
-        this.changeSize();
-        this.connectEvents();
-    }
-
-    private connectEvents() {
-        this.inputCanvasHeight.addEventListener('change', (e:Event) => this.changeSize());
-        this.inputCanvasWidth.addEventListener('change', (e:Event) => this.changeSize());
-    }
-    
-    public changeSize() {
-        this.canvasElement.width = this.inputCanvasWidth.valueAsNumber;
-        this.canvasElement.height = this.inputCanvasHeight.valueAsNumber;
-    }
-
-    public addGrid(cols:number, rows:number, tileWidth:number, tileHeight:number, offsetX:number = 0, offsetY:number = 0, name:string = "Screen") {
-        let grid:Grid = new Grid(this.ctx, cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
-        grid.draw();
-    }
-
-    public delGrid() {}
-
-    public clear() {
-        this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-    }
-}
-
-class GridTable {
-    private tableElement: HTMLTableElement;
-
-    public constructor(id:string) {
-        this.tableElement = document.getElementById(id) as HTMLTableElement;
-        this.tableElement.
-    }
-
-    public addRow() {}
-
-    public delRow() {}
-
-}
-
-class Grid {
+export class Grid {
     public cols: number;
     public rows: number;
     public name: string;
@@ -190,12 +128,3 @@ class DefaultStyle implements GridStyle {
         this.baseColor = "#fff";
     }
 }
-
-class GridOptions {
-}
-
-
-
-window.onload = () => {
-    new App();
-};
