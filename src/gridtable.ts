@@ -9,6 +9,9 @@ export class GridTable {
     }
 
     private connectEvents() {
+        this.tableBody.addEventListener('click', (e: Event) => {
+            this.selectRow(e.target as HTMLTableCellElement);
+        });
 
     }
 
@@ -24,8 +27,13 @@ export class GridTable {
 
     public delRow() {}
 
-    private selectRow(e: Event) {
-
+    private selectRow(td: HTMLTableCellElement) {
+        let tr = td.parentNode as HTMLTableRowElement;
+        let rows: NodeListOf<Element> = this.tableBody.querySelectorAll('tr.selected');
+        rows.forEach((row:Element) => {
+            row.classList.remove('selected')
+        });
+        tr.classList.add('selected');
     }
 
 }
