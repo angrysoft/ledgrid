@@ -9,16 +9,13 @@ class App {
 
     public constructor() {
         this.canvas = new Canvas(1920, 1080);
-        this.canvas.addGrid(1,1,128,128);
-        this.canvas.addGrid(2,1,128,128, 129);
-        this.canvas.addGrid(1,1,128,128, 128+128+128);
         this.btnAddGrid = document.getElementById('add-grid') as HTMLButtonElement;
-        this.btnAddGrid
+        this.btnAddGrid.addEventListener('click', () => this.canvas.addGrid(1,1,128,128));
         
         this.btnSaveCanvas = document.getElementById('save-canvas') as HTMLAnchorElement;
         this.btnSaveCanvas.addEventListener('click', (e:Event) => {
             this.btnSaveCanvas.href = this.canvas.saveToFile();
-            this.btnSaveCanvas.download = `${this.canvas.width}x${this.canvas.height}`;
+            this.btnSaveCanvas.download = `${this.canvas.name}-${this.canvas.width}x${this.canvas.height}`;
         });
 
         this.btnClearCanvas = document.getElementById('clear-canvas') as HTMLButtonElement;

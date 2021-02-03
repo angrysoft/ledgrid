@@ -6,10 +6,11 @@ export class Canvas {
     private ctx: CanvasRenderingContext2D;
     private inputCanvasWidth: HTMLInputElement;
     private inputCanvasHeight: HTMLInputElement;
-    private gridList: Grid[] = [];
     private gridTable: GridTable;
+    private canvasName:string;
 
-    public constructor(width:number, height:number) {
+    public constructor(width:number, height:number, name:string = 'Canvas') {
+        this.canvasName = name;
         this.canvasElement = document.getElementById("led-canvas") as HTMLCanvasElement;
         this.ctx = this.canvasElement.getContext("2d") as CanvasRenderingContext2D;
         
@@ -26,6 +27,10 @@ export class Canvas {
     private connectEvents() {
         this.inputCanvasHeight.addEventListener('change', (e:Event) => this.changeSize());
         this.inputCanvasWidth.addEventListener('change', (e:Event) => this.changeSize());
+        this.gridTable.tableElement.addEventListener('gridchange', () => {
+            console.log('gridchange');
+            this.redrawGrids();
+        });
     }
     
     public changeSize() {
@@ -42,15 +47,26 @@ export class Canvas {
         return this.canvasElement.height;
     }
 
+    public get name(): string {
+        return this.canvasName;
+    }
+
+    public set name(value:string) {
+        this.canvasName = value;
+    }
+
     private redrawGrids() {
-        this.gridList.forEach((grid: Grid) => {
-            grid.draw();
+        let grids = this.gridTable.getGridFromRows();
+        this.clear();
+        grids.forEach((grid) => {
+            console.log(grid);
+            let newGrid: Grid = new Grid(this.ctx, Number(grid[0]), Number(grid[1]), Number(grid[2]), Number(grid[3]), Number(grid[4]), Number(grid[5]), grid[6]?.toString());
+            newGrid.draw()
         });
     }
 
     public addGrid(cols:number, rows:number, tileWidth:number, tileHeight:number, offsetX:number = 0, offsetY:number = 0, name:string = "Screen") {
         let grid:Grid = new Grid(this.ctx, cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
-        this.gridList.push(grid);
         this.gridTable.addRow(cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
         grid.draw();
     }
