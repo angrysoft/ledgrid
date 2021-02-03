@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>LedGrid</title>
         <meta name="LedGrid">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://angrysoft.ovh/css/angrycss-1.min.css">
@@ -9,77 +10,42 @@
 
     </head>
     <body>
-        <div class="container-fluid app">
-            <div id="dialog" class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">Add Link<span class="close">X</span></div>
-                <div class="modal-body">
-                    <div>
-                    <label class="label"> Adres Url</label><input class="input">
-                    </div>
-                    <div>
-                    <button class="btn blue">OK</button>
-                    <button class="btn blue" onclick="hideModal('#dialog')">Anuluj</button>
-                    </div>
-                </div>
-                </div>
+        <div class="grid-container">
+            <div class="canvas-wrapper txt-center">
+                <canvas id="led-canvas"></canvas>
             </div>
-
-            <div class="row center-xs">
-                <div class="col-xs-12 cavas-wrapper txt-center">
-                    <canvas id="led-canvas"></canvas>
-                </div>
+            <div class="canvas-form">
+                <a class="btn green" href="#" id="save-canvas">Save Canvas</a>
+                <button class="btn red" id="clear-canvas">Clear Canvas</button>
+                <button class="btn blue" id="import-canvas">Import Canvas</button>
+                <button class="btn blue" id="export-canvas">Export Canvas</button>
+                <input id="canvas-name" type="text" placeholder="Name" class="input" value="Canvas">
+                <input id="canvas-width" type="number" placeholder="x" class="input">
+                <label for="canvas-width" class="label">H</label>
+                <input id="canvas-height" type="number" placeholder="y" class="input">
+                <label for="canvas-width" class="label">V</label>
             </div>
-            
-            <div class="row center-xs canvas-form">
-                <div class="col-md-2 col-xs-12"><a class="btn red" href="#" id="save-canvas">Save Canvas</a></div>
-                <div class="col-md-2 col-xs-12"><button class="btn red" id="clear-canvas">Clear Canvas</button></div>
-                <div class="col-md-6 col-xs-12">
-                    <div class="row center-xs">
-                        <div class="col-xs-2">
-                            <label class="label">Canvas</label>
-                        </div> 
-    
-                        <div class="col-xs-4">
-                                <input id="canvas-width" type="number" placeholder="x" class="input">
-                        </div>
-                        <div class="col-xs-1">
-                            <label for="canvas-width" class="label">H</label>
-                        </div>
-    
-                        <div class="col-xs-4">
-                                <input id="canvas-height" type="number" placeholder="y" class="input">
-                        </div>
-                        <div class="col-xs-1">
-                            <label for="canvas-width" class="label">V</label>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid-form">
+                <button class="btn green" id="add-grid">Add Grid</button>
+                <button class="btn red" id="add-grid">Del Grid</button>
             </div>
-            
-            <div class="row center-xs grid-form">
-                <div class="col-md-2 col-xs-12"><button class="btn blue" id="add-grid">Add Grid</button></div>
-            </div>
-            
-            <div class="row center-xs">
-                <div class="col-xs-12">
-                    <table id="grid-list" class="table dark striped">
-                          <thead>
-                            <tr>
-                                <th>Size x</th>
-                                <th>Size y</th>
-                                <th>Cols</th>
-                                <th>Rows</th>
-                                <th>Offset x</th>
-                                <th>offset y</th>
-                                <th>Name</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
-                  </div>
+            <div class="gird-list">
+                <table id="grid-list" class="table dark striped">
+                    <thead>
+                      <tr>
+                          <th>Size x</th>
+                          <th>Size y</th>
+                          <th>Cols</th>
+                          <th>Rows</th>
+                          <th>Offset x</th>
+                          <th>offset y</th>
+                          <th>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
             </div>
         </div>
     </body>
-</html>
+    </html>

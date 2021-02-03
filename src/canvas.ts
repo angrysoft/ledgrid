@@ -57,7 +57,7 @@ export class Canvas {
 
     private redrawGrids() {
         let grids = this.gridTable.getGridFromRows();
-        this.clear();
+        this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
         grids.forEach((grid) => {
             console.log(grid);
             let newGrid: Grid = new Grid(this.ctx, Number(grid[0]), Number(grid[1]), Number(grid[2]), Number(grid[3]), Number(grid[4]), Number(grid[5]), grid[6]?.toString());
@@ -77,7 +77,7 @@ export class Canvas {
 
     public clear() {
         this.ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-        this.gridList = [];
+        this.gridTable.clear();
     }
 
     public saveToFile() {

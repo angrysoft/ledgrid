@@ -23,6 +23,7 @@ export class GridTable {
         let currentValue = td.innerText;
         td.contentEditable = 'true';
         td.focus();
+        document.execCommand('selectAll', false);
         td.addEventListener('focusout', () => {
             td.contentEditable = 'false';
             if (currentValue != td.innerText) {
@@ -73,6 +74,10 @@ export class GridTable {
             ret.push(grid);       
         });
         return ret;
+    }
+
+    public clear() {
+        this.tableBody.innerHTML = '';
     }
 
 }

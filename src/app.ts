@@ -6,9 +6,17 @@ class App {
     private btnAddGrid: HTMLButtonElement;
     private btnSaveCanvas: HTMLAnchorElement;
     private btnClearCanvas: HTMLButtonElement;
+    private inputCanvasName: HTMLInputElement;
 
     public constructor() {
         this.canvas = new Canvas(1920, 1080);
+        this.inputCanvasName = document.getElementById('canvas-name') as HTMLInputElement;
+        this.inputCanvasName.addEventListener('change', (e: Event) => {
+            console.log(this.inputCanvasName.value);
+            this.canvas.name = this.inputCanvasName.value;
+        });
+        
+
         this.btnAddGrid = document.getElementById('add-grid') as HTMLButtonElement;
         this.btnAddGrid.addEventListener('click', () => this.canvas.addGrid(1,1,128,128));
         
