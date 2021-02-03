@@ -51,6 +51,7 @@ export class Canvas {
     public addGrid(cols:number, rows:number, tileWidth:number, tileHeight:number, offsetX:number = 0, offsetY:number = 0, name:string = "Screen") {
         let grid:Grid = new Grid(this.ctx, cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
         this.gridList.push(grid);
+        this.gridTable.addRow(cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
         grid.draw();
     }
 
