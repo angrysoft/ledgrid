@@ -76,6 +76,18 @@ export class GridTable {
         return ret;
     }
 
+    public getGridInfoList() {
+        let ret:Map<string,string>[] = [];
+        let rows: NodeListOf<Element> = this.tableBody.querySelectorAll('tr');
+        rows.forEach((row:Element) => {
+            let grid: Map<string,any> = new Map();
+            row.childNodes.forEach((cell) => {
+                ///start tomorrow here
+            }); 
+        });
+
+    }
+
     public clear() {
         this.tableBody.innerHTML = '';
     }
