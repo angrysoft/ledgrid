@@ -1,3 +1,5 @@
+import { GridInfo } from "./grid.js";
+
 export class GridTable {
     public tableElement: HTMLTableElement;
     private tableBody: HTMLTableSectionElement;
@@ -50,6 +52,7 @@ export class GridTable {
             let cell = row.insertCell();
             cell.innerText = c.toString();
         });
+
     }
 
     public delRow() {}
@@ -65,8 +68,8 @@ export class GridTable {
 
     public getGridFromRows(): (number | string| null)[][] {
         let ret: (number | string| null)[][] = [];
-        let rows: NodeListOf<Element> = this.tableBody.querySelectorAll('tr');
-        rows.forEach((row:Element) => {
+        let rows: NodeListOf<HTMLElement> = this.tableBody.querySelectorAll('tr');
+        rows.forEach((row:HTMLElement) => {
             let grid: (number | string| null)[] = [];
             row.childNodes.forEach((cell) => {
                 grid.push(cell.textContent);
@@ -76,15 +79,20 @@ export class GridTable {
         return ret;
     }
 
-    public getGridInfoList() {
-        let ret:Map<string,string>[] = [];
-        let rows: NodeListOf<Element> = this.tableBody.querySelectorAll('tr');
-        rows.forEach((row:Element) => {
-            let grid: Map<string,any> = new Map();
-            row.childNodes.forEach((cell) => {
-                ///start tomorrow here
-            }); 
+    public getGridInfoList(): Record<string, string|number>[] {
+        // let ret:GridInfo[] = [];
+        let ret:Record<string, string|number>[] = [];
+        let rows: NodeListOf<HTMLTableRowElement> = this.tableBody.querySelectorAll('tr');
+        rows.forEach((row:HTMLTableRowElement) => {
+            
+            let grid:Record<string, string|number> = {};
+            console.log(row.childElementCount);
+            // row.childNodes.forEach((cell:HTMLTableColElement) => {
+            //     console.log(typeof(cell));
+                
+            // }); 
         });
+        return ret;
 
     }
 

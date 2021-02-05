@@ -73,6 +73,7 @@ class App {
         let style:string = "default";
         this.canvas.addGrid(cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
         this.gridTable.addRow(cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
+        this.gridTable.getGridInfoList();
     }
     
     private delGrid():void {}
@@ -99,8 +100,7 @@ class App {
     }
     
     private redrawCanvas() {
-        let grids = this.gridTable.getGridFromRows();
-
+        this.canvas.redrawGrids(this.gridTable.getGridInfoList());
     }
 }
 

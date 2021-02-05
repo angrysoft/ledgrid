@@ -61,6 +61,25 @@ export class Grid {
     }
 }
 
+export class GridInfo {
+    cols:number = 1;
+    rows:number = 1 ;
+    tileWidth:number = 128;
+    tileHeight:number = 128;
+    offsetX:number = 0;
+    offsetY:number = 0;
+    name:string = "Screen";
+    style:string = "default";
+
+    public set(key:string, value:any) {
+        
+    }
+
+    public get(key:string) {
+
+    }
+};
+
 class Tile {
     public x: number;
     public y: number;
