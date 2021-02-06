@@ -46,12 +46,39 @@ export class GridTable {
 
     public addRow(cols:number, rows:number, tileWidth:number, tileHeight:number, offsetX:number = 0, offsetY:number = 0, name:string = "Screen") {
         let row: HTMLTableRowElement = this.tableBody.insertRow();
-        let colList: Array<number | string> = [cols, rows, tileWidth, tileHeight, offsetX, offsetY, name];
+        // let colList: Array<number | string> = [cols, rows, tileWidth, tileHeight, offsetX, offsetY, name];
 
-        colList.forEach((c:number | string) => {
-            let cell = row.insertCell();
-            cell.innerText = c.toString();
-        });
+        // colList.forEach((c:number | string) => {
+        //     let cell = row.insertCell();
+        //     cell.innerText = c.toString();
+        // });
+        let cell = row.insertCell();
+        cell.innerText = cols.toString();
+        cell.setAttribute('data-name', 'cols');
+
+        cell = row.insertCell();
+        cell.innerText = rows.toString();
+        cell.setAttribute('data-name', 'rows');
+
+        cell = row.insertCell();
+        cell.innerText = tileWidth.toString();
+        cell.setAttribute('data-name', 'tileWidth');
+
+        cell = row.insertCell();
+        cell.innerText = tileHeight.toString();
+        cell.setAttribute('data-name', 'tileHeight');
+
+        cell = row.insertCell();
+        cell.innerText = offsetX.toString();
+        cell.setAttribute('data-name', 'offsetX');
+
+        cell = row.insertCell();
+        cell.innerText = offsetY.toString();
+        cell.setAttribute('data-name', 'offsetY');
+
+        cell = row.insertCell();
+        cell.innerText = name.toString();
+        cell.setAttribute('data-name', 'name');
 
     }
 
@@ -86,11 +113,10 @@ export class GridTable {
         rows.forEach((row:HTMLTableRowElement) => {
             
             let grid:Record<string, string|number> = {};
-            console.log(row.childElementCount);
-            // row.childNodes.forEach((cell:HTMLTableColElement) => {
-            //     console.log(typeof(cell));
-                
-            // }); 
+            row.cells
+            for (let cell of row.cells) {
+                console.log(cell.innerText, cell.getAttribute('data-name'));
+            }
         });
         return ret;
 
