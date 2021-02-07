@@ -1,5 +1,4 @@
-import { Grid } from "./grid.js";
-
+import { Grid, GridInfo } from "./grid.js";
 
 export class Canvas {
     private canvasElement: HTMLCanvasElement;
@@ -35,11 +34,17 @@ export class Canvas {
         this.canvasName = value;
     }
 
-    public redrawGrids(gridList: any[]) {
+    public redrawGrids(gridList: GridInfo[]) {
         this.clear();
         gridList.forEach((grid) => {
-            console.log(grid);
-            let newGrid: Grid = new Grid(this.ctx, Number(grid[0]), Number(grid[1]), Number(grid[2]), Number(grid[3]), Number(grid[4]), Number(grid[5]), grid[6]?.toString());
+            let newGrid: Grid = new Grid(this.ctx,
+                Number(grid.get("cols")),
+                Number(grid.get("rows")),
+                Number(grid.get("tileWidth")),
+                Number(grid.get("tileHeight")),
+                Number(grid.get("offsetX")),
+                Number(grid.get("offsetY")),
+                String(grid.get("name")));
             newGrid.draw()
         });
     }

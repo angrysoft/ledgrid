@@ -65,15 +65,14 @@ class App {
     private addGrid():void {
         let cols:number = 1;
         let rows:number = 1;
-        let tileWidth:number = 1;
-        let tileHeight:number = 1;
-        let offsetX:number = 1;
-        let offsetY:number = 1;
+        let tileWidth:number = 128;
+        let tileHeight:number = 128;
+        let offsetX:number = 0;
+        let offsetY:number = 0;
         let name:string = "Screen";
         let style:string = "default";
         this.canvas.addGrid(cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
         this.gridTable.addRow(cols, rows, tileWidth, tileHeight, offsetX, offsetY, name);
-        this.gridTable.getGridInfoList();
     }
     
     private delGrid():void {}
@@ -100,6 +99,7 @@ class App {
     }
     
     private redrawCanvas() {
+        console.log(this.gridTable.getGridInfoList()[0]);
         this.canvas.redrawGrids(this.gridTable.getGridInfoList());
     }
 }

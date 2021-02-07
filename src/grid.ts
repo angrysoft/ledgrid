@@ -62,21 +62,29 @@ export class Grid {
 }
 
 export class GridInfo {
-    cols:number = 1;
-    rows:number = 1 ;
-    tileWidth:number = 128;
-    tileHeight:number = 128;
-    offsetX:number = 0;
-    offsetY:number = 0;
-    name:string = "Screen";
-    style:string = "default";
+    private keys:string[] = [];
+    private values:any[] =[];
 
     public set(key:string, value:any) {
-        
+        let index = this.keys.indexOf(key); 
+        if (index >= 0) {
+            this.values[index] = key;
+        } else {
+            this.keys.push(key);
+            this.values.push(value);
+        }
     }
 
-    public get(key:string) {
+    public get(key:string): number | string {
+        return this.values[this.keys.indexOf(key)];
+    }
 
+    public delete(key:string) {
+        let index = this.keys.indexOf(key); 
+        if (index >= 0) {
+            delete this.values[index];
+            delete this.keys[index];
+        }
     }
 };
 

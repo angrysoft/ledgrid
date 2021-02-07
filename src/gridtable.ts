@@ -106,16 +106,17 @@ export class GridTable {
         return ret;
     }
 
-    public getGridInfoList(): Record<string, string|number>[] {
-        // let ret:GridInfo[] = [];
-        let ret:Record<string, string|number>[] = [];
+    public getGridInfoList(): GridInfo[] {
+        let ret:GridInfo[] = [];
         let rows: NodeListOf<HTMLTableRowElement> = this.tableBody.querySelectorAll('tr');
         rows.forEach((row:HTMLTableRowElement) => {
-            
-            let grid:Record<string, string|number> = {};
-            row.cells
+            let grid:GridInfo = new GridInfo();
             for (let cell of row.cells) {
-                console.log(cell.innerText, cell.getAttribute('data-name'));
+                let name:string | null = cell.getAttribute('data-name');
+                if (typeof name == "string") {
+                    grid.set(name, cell.innerText);
+                    console.log(name, grid.get(name));
+                }
             }
         });
         return ret;
