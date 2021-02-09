@@ -57,7 +57,6 @@ class App {
         this.inputCanvasHeight.addEventListener('change', (e:Event) => this.canvasChangeSize());
         this.inputCanvasWidth.addEventListener('change', (e:Event) => this.canvasChangeSize());
         this.gridTable.tableElement.addEventListener('gridchange', () => {
-            console.log('gridchange');
             this.redrawCanvas();
         });
     }
@@ -99,7 +98,7 @@ class App {
     }
     
     private redrawCanvas() {
-        console.log(this.gridTable.getGridInfoList()[0]);
+        console.log('redrawCAnvas', this.gridTable.getGridInfoList());
         this.canvas.redrawGrids(this.gridTable.getGridInfoList());
     }
 }

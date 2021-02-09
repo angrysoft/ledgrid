@@ -26,6 +26,24 @@ export class GridTable {
         td.contentEditable = 'true';
         td.focus();
         document.execCommand('selectAll', false);
+        
+        td.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              td.blur();
+            }
+        });
+        
+        td.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                td.innerText = currentValue;
+                td.contentEditable = 'false';
+                return;
+            }
+        });
+
+
         td.addEventListener('focusout', () => {
             td.contentEditable = 'false';
             if (currentValue != td.innerText) {
@@ -34,24 +52,14 @@ export class GridTable {
                     return;
                 }
                 this.tableElement.dispatchEvent(this.gridChangeEvent);
-                console.log(td.innerText);
             }
-        }, {'once': true});
-
-        td.addEventListener('input', (e: Event) => {
-            console.log(`${e.target}`);
         }, {'once': true});
     }
 
 
     public addRow(cols:number, rows:number, tileWidth:number, tileHeight:number, offsetX:number = 0, offsetY:number = 0, name:string = "Screen") {
         let row: HTMLTableRowElement = this.tableBody.insertRow();
-        // let colList: Array<number | string> = [cols, rows, tileWidth, tileHeight, offsetX, offsetY, name];
-
-        // colList.forEach((c:number | string) => {
-        //     let cell = row.insertCell();
-        //     cell.innerText = c.toString();
-        // });
+        
         let cell = row.insertCell();
         cell.innerText = cols.toString();
         cell.setAttribute('data-name', 'cols');
@@ -115,9 +123,9 @@ export class GridTable {
                 let name:string | null = cell.getAttribute('data-name');
                 if (typeof name == "string") {
                     grid.set(name, cell.innerText);
-                    console.log(name, grid.get(name));
                 }
             }
+            ret.push(grid);
         });
         return ret;
 
