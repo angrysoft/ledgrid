@@ -176,6 +176,12 @@ class StringCalc {
         if (this.digits === undefined || this.operators === undefined){
             return;
         }
+        let sortedOperations: string[] =[];
+        let operatorPosition: number = 0;
+        while(this.operators.length > 0) {
+            let op:string = this.operators[0];
+            if (op === '*' || op === '/') 
+        }
         
     }
 
