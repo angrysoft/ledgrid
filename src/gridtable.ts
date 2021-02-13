@@ -3,7 +3,7 @@ import { GridInfo } from "./grid.js";
 export class GridTable {
     public tableElement: HTMLTableElement;
     private tableBody: HTMLTableSectionElement;
-    private gridChangeEvent: Event = new Event('gridchange');
+    private gridChangeEvent: Event = new Event('grid-change');
 
     public constructor(id:string) {
         this.tableElement = document.getElementById(id) as HTMLTableElement;
@@ -46,14 +46,30 @@ export class GridTable {
 
         td.addEventListener('focusout', () => {
             td.contentEditable = 'false';
-            if (currentValue != td.innerText) {
-                if (isNaN(Number(td.innerText))) {
-                    td.innerText = currentValue;
-                    return;
-                }
+            let newValue = this.calculateCellValue(currentValue, td.innerText);
+            if (currentValue != newValue && newValue) {
+                td.innerText = newValue;
                 this.tableElement.dispatchEvent(this.gridChangeEvent);
             }
         }, {'once': true});
+    }
+    
+    private calculateCellValue(currentValue:string, value:string): string {
+        let ret:string = '';
+        if (isNaN(Number(value))) {
+            let letters:RegExp = new RegExp('[A-z]');
+            if (letters.test(value)) {
+                return currentValue;
+            }
+
+            let rDigit: RegExp = new RegExp('(\\d+)', 'g');
+            let digits: number[]|undefined = value.match(rDigit)?.map(Number);
+            let rOp: RegExp = new RegExp('(\\+|-|\\*|\\/)', 'g');
+            let operators: string[]|undefined = value.match(rOp)?.map(String);
+
+            console.log(`${digits}, ${operators}`);
+        }
+        return ret;
     }
 
 
@@ -135,4 +151,35 @@ export class GridTable {
         this.tableBody.innerHTML = '';
     }
 
+}
+
+class StringCalc {
+    private digits: number[]| undefined = undefined;
+    private operators: string[]|undefined = undefined;
+    private result: number| null = null;
+
+    constructor(value:string) {
+        if (isNaN(Number(value))) {
+            let letters:RegExp = new RegExp('[A-z]');
+            if (! letters.test(value)) {
+                let rDigit: RegExp = new RegExp('(\\d+)', 'g');
+                this.digits = value.match(rDigit)?.map(Number);
+                let rOp: RegExp = new RegExp('(\\+|-|\\*|\\/)', 'g');
+                this.operators = value.match(rOp)?.map(String);
+            }
+            console.log(`${this.digits}, ${this.operators}`);
+            this.calculate();
+        }
+    }
+
+    private calculate():void {
+        if (this.digits === undefined || this.operators === undefined){
+            return;
+        }
+        
+    }
+
+    public isNull() {
+
+    }
 }
